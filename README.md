@@ -8,7 +8,7 @@ The workflow is designed around a clear learning contrast:
 wrong situation → expert explanation → corrected situation
 ```
 
-It separates raw error frequency from transcript evidence, preserves Vietnamese dialogue and accents, locks character continuity, and validates the final Flow bundle before generation.
+It separates raw error frequency from transcript evidence, preserves Vietnamese dialogue and accents, requires approval of actual reference images, reviews natural Vietnamese dialogue, and validates the final Flow bundle before generation. Audible Vietnamese dialogue in Flow is the default; silent output is optional only when requested.
 
 ## Install
 
@@ -42,3 +42,4 @@ python3 skills/video-spec/scripts/validate_bundle.py /path/to/flow_handoff --exp
 ```
 
 The repository intentionally contains no call IDs, customer data, transcript dumps, API keys, or provider credentials.
+

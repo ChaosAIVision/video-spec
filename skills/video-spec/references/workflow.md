@@ -92,7 +92,7 @@ Every section includes:
 - source/evidence reference;
 - post-production overlay, if any.
 
-Read dialogue aloud or estimate speaking time. Split crowded exchanges rather than forcing multiple turns into an eight-second clip. Present the script, record approval, and stop before scene planning.
+Apply the natural-Vietnamese review in `prompt-engineering.md`. Run a text readthrough or listen to actual audio when available; record the method and specific revisions. Estimate or measure speaking time including pauses and reactions. Split crowded exchanges rather than forcing multiple turns into an eight-second clip. Preserve the lesson and approved facts while removing report-like phrasing. Present the script, record approval, and stop before scene planning.
 
 ## 7. Plan visual beats and gate again
 
@@ -109,6 +109,12 @@ Map each section to one or more clips. Every generated scene defines:
 
 Check the whole sequence for repeated framing and slideshow risk. Deliberate repetition is valid when it enables a direct wrong/right comparison. Present the plan, record approval, and stop before building prompts.
 
-## 8. Build, validate and hand off
+## 8. Approve reference images
 
-After approval, create the complete bundle contract, run the validator, and report zero-cost/spec-only status. Ask whether Flow should be manual or browser-driven. Generated clips return under deterministic scene filenames; edit and compose are a separate authorization boundary.
+Prepare or collect actual images of recurring characters, environments and key props. Image generation still requires authorization under the operating boundary. Show the images to the user, not only text descriptions. Record explicit approval for each exact file version in `reference_images.json`, with asset ID, role, relative path, SHA-256, approval source and timestamp. Map every scene to the approved assets it will use.
+
+If images are pending, finish useful draft work but label the handoff as blocked on image approval. Do not generate video or call the bundle complete. Replacing an image or adopting a generated frame as a reference requires approval of that version.
+
+## 9. Build, validate and hand off
+
+After script, scene-plan and reference-image approval, create the bundle and run the validator. Default to native Vietnamese dialogue in Flow; honor another audio mode when selected for the project. Report actual usage; a spec-only handoff does not imply later generation is free. Manual Flow operation is the default unless browser-driven operation was requested. Generated clips return under deterministic filenames; review speech against the script, natural delivery/reactions, lip-sync and identity against approved images. Edit and compose remain a separate authorization boundary.

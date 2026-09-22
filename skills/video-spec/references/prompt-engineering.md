@@ -1,6 +1,6 @@
 # Google Flow prompt engineering
 
-Use this reference after an approved scene plan exists.
+Use this reference during script review, reference-image approval and Flow prompt assembly.
 
 ## Prompt assembly order
 
@@ -11,10 +11,10 @@ Build every scene prompt in this order:
 3. composition and fixed screen-side rules;
 4. subject, environment and lighting;
 5. ordered actions and emotion transition;
-6. exact silent dialogue acting reference;
+6. audio mode, speaker-tagged Vietnamese dialogue, delivery and turn order;
 7. camera, lens, depth of field and grade;
 8. narrative intent;
-9. silent-output instruction and negative constraints.
+9. audio direction consistent with the selected mode and relevant negative constraints.
 
 Translate scene-plan camera fields into direct visual language:
 
@@ -32,13 +32,40 @@ Create one identity block per recurring character and reuse its exact name in ev
 
 Stable traits include face, age, hairstyle, wardrobe, accessories and recurring prop. Performance traits include emotion, posture, eye line, pace and gesture. Never encode a temporary emotion as part of the permanent identity block.
 
-For multi-scene continuity, use the best approved frame from the preceding scene as the next reference. If a corrected replay must mirror the wrong version, reference the establishing frame from the wrong version and state which elements change: warmth, pause, posture or reaction.
+Before video generation, obtain user approval of actual images for every recurring character, environment and required key prop. Record paths, SHA-256 hashes, approval source and timestamp in `reference_images.json`; map every scene to its asset IDs. Show the actual images: approval of a written description or script does not approve unseen images. Missing or changed images block generation until approved.
+
+Reuse approved master images as stable anchors. A frame from a generated scene is a candidate reference, not an automatic replacement for the master; inspect it and record approval before adopting it. If a corrected replay must mirror the wrong version, use its approved establishing frame and specify which actions or reactions change.
 
 ## Dialogue and acting
 
-Write visual-control prose in English. Preserve exact Vietnamese dialogue in quotation marks as a lip movement and performance reference. Describe pace and pause visually because silent output will be dubbed later.
+Write visual-control prose in English. Default to `native_dialogue`: request audible Vietnamese speech synchronized with the visible speaker. Preserve approved lines verbatim, label each speaker, and specify accent when agreed, pace, pauses and turn order. Keep the listener silent during the other person's turn unless intentional overlap is scripted. Verify actual speech and lip-sync on generated clips; a prompt is not a guarantee.
+
+| Audio mode | Prompt and handoff requirements |
+|---|---|
+| `native_dialogue` (default) | Spoken Vietnamese dialogue, named speakers and natural delivery; no silent-output or no-audio instruction. |
+| `voiceover` | State the narrator and whether audio comes from Flow or post-production. On-screen characters do not mouth the narration. |
+| `dubbed_dialogue` | Include acting dialogue, approved external audio/timing and a lip-sync/alignment plan. Do not assume silent acting will match later audio. |
+| `silent` | Use only when explicitly requested; omit spoken lines and request silent output. |
+
+Use actual supported model controls; do not assume a `Return silent videos ON` UI toggle exists.
+
+One video may mix modes, for example native dialogue in the customer scenes and expert voiceover between them. Record the default in checkpoint `audio_mode` and any approved per-scene overrides in `scene_audio_modes` (scene ID to mode). Keep the master sheet and each scene prompt consistent with these choices.
 
 Keep each scene to one dominant exchange. If two complete turns crowd the duration, split the scene. Allow reaction time inside the clip; the customer's reaction should occur during the agent's line when that causal relationship matters.
+
+## Natural Vietnamese dialogue review
+
+Write spoken Vietnamese, not report prose. Give each turn one intent and usually one or two short sentences; let speaking time determine the cut. Use `em – anh/chị` for the consultant when appropriate and keep customer pronouns consistent with their role and age. Avoid mechanical repetition of `dạ`, excessive politeness markers, forced filler, textbook explanations and translated English syntax. Do not force slang or an accent the user has not requested.
+
+Make every reply respond to the preceding line. Let customers hesitate, ask back or remain unconvinced; correct agent behavior need not yield a sale. Keep expert speech professional but speakable. Preserve evidence, the learning objective and approved facts when rewriting. Do not present adapted dialogue as an exact transcript quotation.
+
+Example with the same objection and corrective intent:
+
+- Customer: “Chị thấy giá cao quá, để chị suy nghĩ thêm.”
+- Stiff consultant: “Em xin ghi nhận ý kiến của chị về vấn đề giá thành sản phẩm. Chị có thể chia sẻ thêm nguyên nhân được không ạ?”
+- Natural consultant: “Dạ, chị đang thấy cao so với loại chị dùng, hay so với số tiền chị định chi ạ?”
+
+Before script approval, run a text readthrough or listen to an actual readthrough when available. Check meaning, conversational linkage, pronouns, speaking time including pauses, and whether the expert sounds like a person. Revise awkward lines and record checkpoint `dialogue_review` with `status: reviewed`, `method: text_readthrough` or `audio_readthrough`, and specific notes. Never label a text estimate as an audio test. The record is not an automatic naturalness score. Re-review and obtain script approval after material dialogue changes.
 
 ## Text and overlays
 
@@ -103,7 +130,7 @@ Do not hide duration overflow inside a long prompt.
 End with only constraints relevant to likely failures:
 
 ```text
-Return silent video. No audio, no subtitles, no generated text, no logos,
+No subtitles, no generated text, no logos,
 no watermark, no extra people, no identity drift, no wardrobe change,
 no camera-side swap, no exaggerated acting.
 ```

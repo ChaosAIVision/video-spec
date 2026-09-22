@@ -12,7 +12,7 @@ The brief is complete when it records:
 - explicit scope and exclusions;
 - wrong → teach → right structure or the user's chosen alternative;
 - recurring cast and required layout;
-- narration/dialogue, ambience and music plan;
+- audio mode (`native_dialogue` by default; otherwise `voiceover`, `dubbed_dialogue`, or explicitly requested `silent`), speakers, ambience and music plan;
 - generation boundary and estimated cost.
 
 ## Script
@@ -30,7 +30,7 @@ post-production cue
 evidence/source reference
 ```
 
-The total duration equals the final section end time. Each Flow-bound section fits a supported generation duration or declares how it will be split.
+The total duration equals the final section end time. Each Flow-bound section fits a supported generation duration or declares how it will be split. Apply the natural-Vietnamese review in `prompt-engineering.md` before approval and record the method and specific revisions in the checkpoint. Preserve approved dialogue verbatim in the corresponding scene prompts.
 
 ## Scene plan
 
@@ -63,6 +63,8 @@ flow_handoff/
 ├── master_prompt_sheet.md
 ├── clip_intake.md
 ├── checkpoint.json
+├── reference_images.json
+├── references/images/          # actual approved image files
 └── prompts/
     ├── scene_01.md
     └── ...
@@ -74,7 +76,7 @@ Must state:
 
 - model and aspect ratio;
 - default clip duration and Extend policy;
-- **Return silent videos ON** when dubbing later;
+- selected audio mode, defaulting to audible Vietnamese dialogue generated in Flow; do not assume a silent-output toggle exists;
 - exact paste/generation order;
 - character/reference reuse strategy;
 - continuity and post-production text rules.
@@ -87,7 +89,7 @@ One stable block per recurring character:
 - face, hair, eyes and distinguishing stable features;
 - fixed clothing, accessories and props;
 - personality and performance range;
-- voice reference if dialogue is being acted;
+- voice/accent direction and approved image asset IDs;
 - an explicit preservation sentence;
 - shared negative constraints.
 
@@ -98,7 +100,7 @@ Do not include real customer identities or biometric reference material without 
 Use this table contract:
 
 ```text
-scene_id | duration | aspect | model | prompt | ingredients | extend-to
+scene_id | duration | aspect | model | audio_mode | prompt | ingredients | extend-to
 ```
 
 Every generated scene appears exactly once. `prompt` may link to the full scene file while retaining a one-sentence production summary.
@@ -108,10 +110,10 @@ Every generated scene appears exactly once. `prompt` may link to the full scene 
 Each file contains:
 
 - scene title;
-- length, aspect, model, ingredients and Extend plan;
+- length, aspect, model, audio mode, approved image asset IDs and Extend plan;
 - one complete English prompt in a fenced block;
-- exact Vietnamese dialogue inside the prompt as a silent acting reference;
-- a `Return silent video` instruction when applicable;
+- exact approved Vietnamese dialogue, speaker labels, delivery and turn order for native dialogue;
+- audio direction matching the selected mode; request silence only for explicitly selected silent output;
 - post-production overlay text outside the generation prompt.
 
 ### `clip_intake.md`
@@ -121,7 +123,7 @@ Must define:
 - exact destination directory;
 - deterministic `scene_<id>.mp4` names;
 - alternate naming such as `_alt01`;
-- visual and technical acceptance checks;
+- visual and technical acceptance checks: identity against approved images, speech against the script, natural delivery/reactions, turn-taking and lip-sync; a validated prompt alone does not establish clip quality;
 - the exact message that resumes the editing pipeline.
 
 ### `checkpoint.json`
@@ -130,7 +132,7 @@ Record a custom handoff exit without pretending it is a canonical generation sta
 
 ```json
 {
-  "version": "1.0",
+  "version": "1.1",
   "exit": "flow_handoff",
   "status": "completed",
   "mode": "spec-only",
@@ -138,12 +140,30 @@ Record a custom handoff exit without pretending it is a canonical generation sta
   "cost_usd": 0,
   "scene_count": 0,
   "aspect_ratio": "9:16",
-  "return_silent_videos": true,
+  "audio_mode": "native_dialogue",
+  "scene_audio_modes": {},
+  "dialogue_review": {
+    "status": "reviewed",
+    "method": "text_readthrough",
+    "notes": "Record actual checks and revisions; replace this example."
+  },
   "files": []
 }
 ```
 
 Populate `scene_count` and `files` with the actual output.
+Use `scene_audio_modes` for overrides from the approved script, such as an expert voiceover scene; otherwise scenes inherit `audio_mode`. Include a `Dialogue:` section with exact speaker-tagged lines in every non-silent scene prompt.
+
+### `reference_images.json`
+
+Use `assets/templates/reference_images.template.json`. Include an `assets` array and a `scene_refs` object mapping every scene ID to its image asset IDs. Each asset requires:
+
+```text
+asset_id, role (character/environment/prop/keyframe/style), path, sha256
+approval: status (approved), source (explicit user approval reference), approved_at (ISO 8601 with timezone)
+```
+
+Store actual images under `references/images/` using relative paths. Include at least the recurring characters and environments, plus any required props/keyframes. Each scene's Ingredients field must list its mapped asset IDs. Show the image set for approval before completing the handoff or generating video. Text-only approval does not approve unseen images. A changed image hash invalidates approval: request review of that version, never silently refresh the approval record. The validator checks files, hashes, mappings and recorded approval; it cannot authenticate user approval or judge visual suitability.
 
 ## Approval record
 

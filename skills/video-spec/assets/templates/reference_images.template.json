@@ -1,0 +1,30 @@
+{
+  "version": "1.0",
+  "assets": [
+    {
+      "asset_id": "character_agent",
+      "role": "character",
+      "path": "references/images/agent.png",
+      "sha256": "{{APPROVED_AGENT_IMAGE_SHA256}}",
+      "approval": {
+        "status": "{{AGENT_APPROVAL_STATUS}}",
+        "source": "{{AGENT_APPROVAL_MESSAGE_REFERENCE}}",
+        "approved_at": "{{AGENT_APPROVAL_ISO_TIMESTAMP}}"
+      }
+    },
+    {
+      "asset_id": "environment_office",
+      "role": "environment",
+      "path": "references/images/office.png",
+      "sha256": "{{APPROVED_OFFICE_IMAGE_SHA256}}",
+      "approval": {
+        "status": "{{OFFICE_APPROVAL_STATUS}}",
+        "source": "{{OFFICE_APPROVAL_MESSAGE_REFERENCE}}",
+        "approved_at": "{{OFFICE_APPROVAL_ISO_TIMESTAMP}}"
+      }
+    }
+  ],
+  "scene_refs": {
+    "scene_01": ["character_agent", "environment_office"]
+  }
+}
