@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "project_id": "{{PROJECT_ID}}",
+  "exit": "flow_handoff",
+  "status": "completed",
+  "mode": "spec-only",
+  "generation_api_calls": 0,
+  "cost_usd": 0,
+  "scene_count": {{SCENE_COUNT}},
+  "aspect_ratio": "{{ASPECT_RATIO}}",
+  "return_silent_videos": true,
+  "files": {{FILES_JSON_ARRAY}}
+}

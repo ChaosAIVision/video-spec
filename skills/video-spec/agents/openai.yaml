@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Spec"
+  short_description: "QC insight to Google Flow video specification"
+  default_prompt: "Use $video-spec to turn QC errors and transcripts into an evidence-backed training video specification and Google Flow handoff bundle."

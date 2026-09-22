@@ -1,0 +1,111 @@
+# Google Flow prompt engineering
+
+Use this reference after an approved scene plan exists.
+
+## Prompt assembly order
+
+Build every scene prompt in this order:
+
+1. duration, aspect ratio and visual style;
+2. continuity/reference instruction;
+3. composition and fixed screen-side rules;
+4. subject, environment and lighting;
+5. ordered actions and emotion transition;
+6. exact silent dialogue acting reference;
+7. camera, lens, depth of field and grade;
+8. narrative intent;
+9. silent-output instruction and negative constraints.
+
+Translate scene-plan camera fields into direct visual language:
+
+| Scene-plan field | Prompt phrase example |
+|---|---|
+| `medium_close` | `medium close-up` |
+| `dolly_in` | `slow controlled dolly in` |
+| `lens_mm: 50` | `50mm lens` |
+| `depth_of_field: shallow` | `shallow depth of field` |
+| `color_temperature: warm` | `warm natural grade` |
+
+## Character continuity
+
+Create one identity block per recurring character and reuse its exact name in every prompt. Lock stable traits; vary only performance state.
+
+Stable traits include face, age, hairstyle, wardrobe, accessories and recurring prop. Performance traits include emotion, posture, eye line, pace and gesture. Never encode a temporary emotion as part of the permanent identity block.
+
+For multi-scene continuity, use the best approved frame from the preceding scene as the next reference. If a corrected replay must mirror the wrong version, reference the establishing frame from the wrong version and state which elements change: warmth, pause, posture or reaction.
+
+## Dialogue and acting
+
+Write visual-control prose in English. Preserve exact Vietnamese dialogue in quotation marks as a lip movement and performance reference. Describe pace and pause visually because silent output will be dubbed later.
+
+Keep each scene to one dominant exchange. If two complete turns crowd the duration, split the scene. Allow reaction time inside the clip; the customer's reaction should occur during the agent's line when that causal relationship matters.
+
+## Text and overlays
+
+Flow generates clean picture. Put overlay text after the prompt under `Post only:`. Reserve negative space in the composition if later graphics need it.
+
+Explicitly request:
+
+```text
+No generated text, no subtitles, no labels, no logos, no watermark.
+```
+
+This hard guardrail is necessary because generated text is visually unstable and cannot preserve Vietnamese typography reliably.
+
+## Split-screen dialogue
+
+When the user specifies character sides, repeat the invariant in every dialogue prompt:
+
+```text
+Agent is always LEFT. Customer is always RIGHT. Keep the center divider fixed. No camera-side swap.
+```
+
+Use matched eye lines toward the divider. Keep both faces readable when reaction is part of the lesson. Vary shot scale or movement only when it preserves the comparison.
+
+## Emotional legibility
+
+Prefer restrained micro-actions:
+
+- presses lips together;
+- releases shoulders;
+- pauses typing;
+- holds eye contact;
+- pulls phone slightly away;
+- gives a small nod.
+
+Describe both the starting and ending emotional state. Avoid generic directions such as “looks emotional”; name the visible action that communicates it.
+
+## Wrong/right contrast
+
+Hold context constant and change the target behavior:
+
+| Wrong version | Correct version |
+|---|---|
+| no pause | visible pause |
+| fast, defensive delivery | slower, grounded delivery |
+| rebuttal or solution first | acknowledgment first |
+| customer tightens posture | customer gradually relaxes |
+| cooler, higher-contrast grade | warmer, softer grade |
+
+The corrected outcome should remain realistic: renewed engagement is enough; a sale is not required.
+
+## Model and duration
+
+Use the model selected by the user or available in Flow. Treat eight seconds as the safe default unless the current model supports another limit. For a longer beat, either:
+
+- split at a natural reaction boundary; or
+- generate the opening clip and declare a precise Extend action that starts from its final frame.
+
+Do not hide duration overflow inside a long prompt.
+
+## Negative constraints
+
+End with only constraints relevant to likely failures:
+
+```text
+Return silent video. No audio, no subtitles, no generated text, no logos,
+no watermark, no extra people, no identity drift, no wardrobe change,
+no camera-side swap, no exaggerated acting.
+```
+
+Add scene-specific constraints—such as no smile, no typing, or no product pack—only when they protect the lesson.
