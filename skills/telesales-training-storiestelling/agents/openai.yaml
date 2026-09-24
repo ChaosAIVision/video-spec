@@ -1,0 +1,4 @@
+interface:
+  display_name: "Telesales Training Storiestelling"
+  short_description: "Expert-led training with realistic telesales roleplay"
+  default_prompt: "Use $telesales-training-storiestelling to create a full Vietnamese training script with a welcome, realistic roleplay, detailed expert analysis, and a corrected replay."
