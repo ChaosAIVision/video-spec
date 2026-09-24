@@ -1,6 +1,6 @@
 ---
 name: video-spec
-description: Turn QC error data, call transcripts, coaching insights, or an approved training topic into an evidence-backed wrong → teach → right video specification and a paste-ready Google Flow handoff. Use for training-video analysis, scripting, scene planning, character continuity, Flow prompt bundles, or receiving generated clips back; not for generating or composing video unless the user separately authorizes that stage.
+description: Turn QC evidence or an approved training topic into a video specification and Google Flow handoff. Use for scripting, scene planning, character continuity, receiving generated clips, or explicitly requested voice and video post-production; generation and composition require their own authorization.
 ---
 
 # Video Spec
@@ -9,11 +9,13 @@ Produce a traceable specification before video generation. Preserve the user's s
 
 ## Operating boundary
 
-Start in **spec-only mode**: analysis and local artifacts may proceed; generation calls, Flow credit spending, publishing, and messages to external systems require the user's explicit authorization for that action. If OpenMontage is available and the user requests it, use its pipeline, stage directors, schemas, and checkpoints rather than recreating them.
+For a specification request, start in **spec-only mode**: analysis and local artifacts may proceed; generation calls, Flow credit spending, publishing, and messages to external systems require the user's explicit authorization for that action. A request to edit received clips authorizes the local post-production branch; read [references/postproduction.md](references/postproduction.md) and preserve the source media. If OpenMontage is available and the user requests it, use its pipeline, stage directors, schemas, and checkpoints rather than recreating them.
 
 Keep private source material local. Public outputs contain aggregate findings and anonymized examples unless the user explicitly authorizes identifiable data.
 
 ## Workflow
+
+Use these steps for specification requests. For an authorized edit of existing clips, go directly to [references/postproduction.md](references/postproduction.md); do not restart the brief, script and image-approval gates.
 
 1. **Lock the brief.** Record audience, source scope, date window, exclusions, duration, aspect ratio, language, cast, visual layout, and requested deliverables. Resolve only choices that materially change the output.
 2. **Verify the lesson.** Rank candidate errors after exclusions, inspect supporting transcripts and coaching advice, and choose a teachable behavior supported by observable evidence—not merely the largest raw count. Read [references/workflow.md](references/workflow.md) for the evidence protocol.
@@ -23,7 +25,7 @@ Keep private source material local. Public outputs contain aggregate findings an
 6. **Approve the reference images and build the handoff.** Prepare or collect actual character, environment and required key-prop images, present the images for user approval, and record approval for each exact image version in `reference_images.json`. A text description is not an approved image. Draft prompts may proceed, but do not mark the handoff ready or generate video while any required image is missing, rejected or awaiting approval. After approval, create every artifact defined in [references/artifact-contracts.md](references/artifact-contracts.md). Construct prompts using [references/prompt-engineering.md](references/prompt-engineering.md) and the templates under `assets/templates/`.
 7. **Validate.** Run `python3 scripts/validate_bundle.py <flow_handoff_dir> --expected-scenes N`. Resolve every error before delivery.
 8. **Choose Flow mode.** Manual paste is the default. Browser-driven operation requires an authenticated session; announce every credit-spending Generate action and wait for confirmation unless the user explicitly authorized automatic generation for the current run.
-9. **Receive clips.** Require deterministic `scene_<id>.mp4` names, verify continuity and technical integrity, then hand off to the separately authorized edit/compose workflow.
+9. **Receive clips.** Require deterministic `scene_<id>.mp4` names and verify continuity and technical integrity. When the user requests editing or composition, follow [references/postproduction.md](references/postproduction.md) for voice consistency, cut decisions, transitions, music and release checks.
 
 ## Binding quality rules
 
@@ -42,4 +44,4 @@ Keep private source material local. Public outputs contain aggregate findings an
 
 ## Completion
 
-The task is complete when the approved lesson is traceable to evidence; script, scene plan and actual reference-image approvals are recorded; the natural-dialogue review is documented; the Flow bundle passes the validator; cost/API usage is reported; and the user receives a precise next action. Structural validation does not certify natural delivery or audiovisual quality; inspect generated clips separately.
+A specification task is complete when the approved lesson is traceable to evidence; script, scene plan and actual reference-image approvals are recorded; the natural-dialogue review is documented; the Flow bundle passes the validator; cost/API usage is reported; and the user receives a precise next action. Structural validation does not certify natural delivery or audiovisual quality; inspect generated clips separately. An authorized post-production task is complete when the requested edit is verified on the rendered output and the exact deliverable and preserved source paths are reported.

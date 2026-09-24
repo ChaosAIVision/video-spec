@@ -10,6 +10,8 @@ wrong situation → expert explanation → corrected situation
 
 It separates raw error frequency from transcript evidence, preserves Vietnamese dialogue and accents, requires approval of actual reference images, reviews natural Vietnamese dialogue, and validates the final Flow bundle before generation. Audible Vietnamese dialogue in Flow is the default; silent output is optional only when requested.
 
+When generated clips are ready and editing is requested, the skill also includes a [Vietnamese post-production playbook](skills/video-spec/references/postproduction.md) distilled from a real multi-clip Flow project: speaker-consistent voice replacement, versioned cuts, fade and black-gap repair, transition cards, licensed background music, and release checks.
+
 ## Install
 
 Copy or symlink the skill folder into your Codex skills directory:
@@ -42,4 +44,3 @@ python3 skills/video-spec/scripts/validate_bundle.py /path/to/flow_handoff --exp
 ```
 
 The repository intentionally contains no call IDs, customer data, transcript dumps, API keys, or provider credentials.
-
