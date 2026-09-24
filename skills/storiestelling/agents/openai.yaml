@@ -1,0 +1,4 @@
+interface:
+  display_name: "Storiestelling"
+  short_description: "Create engaging scenes with dialogue and emotional arcs"
+  default_prompt: "Use $storiestelling to turn this material into an engaging situation-driven video with natural dialogue and a clear character change."
