@@ -51,6 +51,8 @@ Use actual supported model controls; do not assume a `Return silent videos ON` U
 
 One video may mix modes, for example native dialogue in the customer scenes and expert voiceover between them. Record the default in checkpoint `audio_mode` and any approved per-scene overrides in `scene_audio_modes` (scene ID to mode). Keep the master sheet and each scene prompt consistent with these choices.
 
+For each generated scene, name its **single topic** and the complete idea it must deliver. A one-person speaking view needs a connected, substantive line that fits the selected clip length; a 1–2-second acknowledgment should stay in a shared-view exchange with neighboring turns when that view is approved. Do not make speech longer with filler or silence. If the idea needs more than one clip, split it at a meaningful subpoint and retain topic and view continuity. Read [the Ensure demo content case](ensure-demo-content-case.md) when that video is the requested style reference.
+
 Keep each scene to one dominant exchange. If two complete turns crowd the duration, split the scene. Allow reaction time inside the clip; the customer's reaction should occur during the agent's line when that causal relationship matters.
 
 ## Natural Vietnamese dialogue review

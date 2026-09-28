@@ -13,6 +13,8 @@ Use this skill's expert-led format when selected. Do not inherit the generic `st
 
 Read [references/approved-ensure-script.txt](references/approved-ensure-script.txt) before drafting the first full script in a session. It is the user-approved example of structure, depth, tone, and presentation. Its prices and offers are historical illustrative inputs, not a current product catalog. Learn the format without copying its plot or sales outcome into unrelated lessons.
 
+When the user asks for more natural, engaging content or cites `ensure demo.mp4`, also read [the video content analysis](../video-spec/references/ensure-demo-content-case.md). Borrow its cause-and-effect dialogue and scene construction, not its in-person staging, product claims, or purchase outcome. The scene-led reference does not replace an expert host when the user requests one; an expert-led lesson does not require every example to end in a sale.
+
 ## 1. Establish scope and preserve prior decisions
 
 Extract the lesson, audience, source facts, product, call stage, cast, language, and requested length from the supplied material. Default to Vietnamese, milk-sales telesales, and an expert-led lesson of approximately 4–6 minutes when unspecified. Estimate again from the actual spoken text and acting pauses; never promise an exact duration without a timed read.
@@ -25,6 +27,8 @@ Use existing approved content as the baseline. Ask only when an unresolved fact 
 - Retain the approved customer, quantity, offer, setting, and scope. Do not infer a cast replacement or purchase purpose solely from a layout reference image.
 
 ## 2. Write a complete lesson, sections 0–7
+
+Before drafting sections, write a private one-sentence story spine: **who wants what, what blocks them, what they learn, which behavior changes, and what observable result follows**. Assign each section a new job in that chain. If two sections repeat the same information, combine or shorten them while preserving any user-required format. A failure and corrected replay must change the target behavior under the same conditions; the customer's response should follow from what changed.
 
 ### 0. Welcome and lesson introduction
 
@@ -46,6 +50,8 @@ Show the customer becoming less engaged through everyday language and reactions.
 
 Let the scene play without expert interruptions. End with a brief reaction or pause before analysis. Never summarize the roleplay as “nhân viên chốt sai, khách từ chối”; write every spoken turn.
 
+Give the customer's objection a concrete, credible reason and let the consultant's miss visibly affect the next response. Do not make a customer state the training rubric. A first answer may miss the point; a later question can reveal the real concern. The scene should have a local beginning, turn and consequence even when it sits inside a larger lesson.
+
 ### 4. Explain the causes in depth
 
 For each main mistake, have the expert:
@@ -64,6 +70,8 @@ Use a short expert bridge and an explicit replay transition. Preserve customer, 
 
 Write the entire corrected exchange. Let the customer still hesitate or ask relevant questions. Have the consultant answer, pause, propose clearly, and wait for confirmation. A fictional purchase can be an earned illustrative ending; never imply the method guarantees sales or fabricate a real recorded outcome.
 
+Show the correction in conversation, not just in a better sounding monologue: the consultant asks or confirms, the customer supplies or corrects information, and the consultant responds to that exact answer. If the real payoff is an accurate address, a clarified need, or permission to continue, stop there rather than forcing an order.
+
 ### 6. Compare what changed
 
 Have the expert compare the two attempts using specific lines, timing, information order, listening, and customer responses. Explain the mechanism of improvement, not just “lần này tốt hơn.” Keep the intended behavior distinct from the sales outcome.
@@ -80,6 +88,15 @@ Provide the customer cue, necessary facts, and a clear spoken instruction for th
 - Use a fixed split-screen during roleplay unless requested otherwise: consultant at a workstation wearing a headset; customer elsewhere holding a phone. Preserve supplied screen sides and identities. They cannot see each other's physical actions; no dialogue reacting to unseen gestures or objects.
 - Keep the phone/headset in use across clips; do not repeat the pickup action. Show listening, hesitation, interrupted typing, and changes of tone without exaggerated acting.
 - Allow the expert to occupy a separate presenter shot before and after roleplay. A fixed roleplay layout does not prohibit expert-led segments.
+
+### Style and scene readiness
+
+- Open each roleplay at a live point of friction or decision. Supply only the context needed to understand the next line; let subsequent facts emerge through the exchange.
+- Give each speaker a reason to say the line to the **other character**. One turn should usually pursue one intent. Vary sentence length naturally; a short objection, a listening beat and a focused answer are more playable than consecutive mini lectures.
+- Let explanations follow a customer question or a newly found need. For long factual passages, group one idea per response and leave room for the listener to react or ask back. Do not create a question merely to introduce the next product feature.
+- Give every production scene **one named topic**: a customer concern, a fact to establish, a question to answer, or a decision to confirm. Write the complete exchange for that topic, including the listener's response or an explicit transition. A change of speaker view alone does not start a new topic; do not put several unrelated checklist points in one scene.
+- For a one-person speaking scene, write a connected passage that can sustain its selected clip length: context for the line, the substantive point, and a natural question or connection forward. Measure it by readthrough or audio. Do not generate a solo clip for a 1–2-second acknowledgment; group that turn with its neighboring exchange in an approved `BOTH` view. Do not pad it with filler or forced pauses. See [the video content analysis](../video-spec/references/ensure-demo-content-case.md) for an example.
+- If one topic exceeds a supported clip length, split at a meaningful subpoint and retain the topic and view continuity. Estimate dialogue and reaction time after writing complete, speakable lines; the clip limit guides the split, not the substance of the scene.
 
 ## 4. Label all production layers
 
@@ -105,5 +122,6 @@ Verify:
 - Every spoken block has a named speaker and clear on-screen/off-screen mode; visuals and screen text cannot be mistaken for speech.
 - Approved dialogue remains unchanged when the task only adds an introduction or reformats.
 - Full exports include welcome plus all seven sections, not a recent fragment. Save TXT as UTF-8 and check section presence and final takeaway before delivery.
+- A viewer can tell why each answer changes the next line, what causes the setback, and what different action earns the corrected response. Every scene has enough dialogue and reaction to perform, with timing estimated from speech rather than an arbitrary clip count.
 
 Use the user's current file-saving workflow for deliverables. For image approval, scene generation, or Google Flow handoff, continue with `video-spec` when requested; a script request alone does not authorize video generation. Do not report script completion as video completion.
