@@ -1,6 +1,6 @@
 # Hậu kỳ clip Flow: quy trình dùng lại
 
-Đọc khi đã có clip và người dùng yêu cầu sửa giọng, lời, hình, nhịp dựng hoặc xuất video. Đây là nhánh hậu kỳ của `video-spec`; yêu cầu cụ thể của người dùng và bản đã duyệt quyết định phạm vi sửa. [Ca Abbott COPD và Ensure](abbott-postproduction-case.md) lưu chi tiết lịch sử để tra cứu khi gặp lỗi tương tự, không phải thông số mặc định.
+Đọc khi đã có clip và người dùng yêu cầu sửa giọng, lời, hình, nhịp dựng hoặc xuất video. Đây là nhánh hậu kỳ của `video-spec`; yêu cầu cụ thể của người dùng và bản đã duyệt quyết định phạm vi sửa. Các ca tham khảo: [Abbott COPD](abbott-postproduction-case.md) và [Ensure Remotion 0928](ensure-remotion-0928-case.md). Mốc giây và thông số của từng ca không phải mặc định cho dự án khác.
 
 ## 1. Chọn đúng nguồn và giữ đường quay lại
 
@@ -37,3 +37,14 @@
 1. Dùng `ffprobe` đối chiếu thời lượng, fps, kích thước, số frame và luồng audio; giải mã toàn bộ file bằng FFmpeg. Với audio copy, có thể so hash âm giải mã để xác nhận không đổi.
 2. Xem các frame ở đầu/cuối, mọi cảnh sửa và các điểm chuyển; nghe audio nơi vừa thay nếu có khả năng. Kiểm tra logo, chữ, mép hình, bar, độ nét, lời đầu/cuối và khoảng im lặng.
 3. Báo rõ điều đã sửa, điều còn giới hạn, đường dẫn tuyệt đối của file mới và bản nguồn/sao lưu. Nếu nhờ chép ra Desktop, kiểm tra file đúng bản rồi chép ra; không ghi đè file khác cùng tên.
+
+## 6. Dựng đồ họa Remotion trên video đã lồng tiếng
+
+Khi người dùng đã giao một phim có lời hoàn chỉnh và yêu cầu title, logo, phụ đề, thẻ giảng dạy và nhạc, dùng **chính phim đó** làm nguồn hình/tiếng. Xác nhận kế hoạch và bản tham chiếu đã được chấp thuận cho lượt dựng hiện tại; không lấy thoại hoặc timecode từ bản cũ.
+
+1. `ffprobe` nguồn, ghi fps, thời lượng, số frame và ranh giới từng phần bằng **frame nguồn**. Lập ánh xạ `frame đầu ra = frame nguồn + tổng frame thẻ đã chèn trước đó`; dùng cùng ánh xạ cho phụ đề, thẻ ý chính và mọi báo lỗi theo giây đầu ra. Cắt frame thừa chỉ sau khi kiểm tra hình và âm ở cuối.
+2. Dựng thẻ đề mục thành `Sequence` riêng. Chữ và logo phải đọc được ở frame 0; kiểm tra ảnh tĩnh của từng thẻ và frame đầu MP4. Dùng nguồn logo đúng bản đã duyệt. Nếu logo đã nằm trong footage chuyên gia, tránh đè logo thứ hai lên cùng vùng.
+3. Đặt các overlay theo thời gian **nguồn** bên trong từng phần: nhãn người nói chỉ khi người đó nói, phụ đề từ lời thật của bản hiện tại, thẻ `CẦN SỬA`/`LÀM ĐÚNG` theo hành động. ASR là bản nháp để rà chữ và mốc, không phải bằng chứng đã nghe. Xem phần mở, các điểm chuyển, mọi thẻ, vùng mép và cảnh cuối ở bản render.
+4. Nhạc dưới lời chuyên gia được giới hạn theo `Sequence`, fade ở ranh giới phần và đo mức sau khi trộn. Sau render, đo độ trễ tiếng so với nguồn ở vài đoạn **không có nhạc**; nếu có lệch, sửa theo độ trễ đo được rồi xác nhận lại. Không áp một giá trị bù cố định cho các bản render khác.
+5. Nếu một hình lạ lóe lên trong một frame, đối chiếu cùng frame trên nguồn, file trung gian và bản xuất trước khi sửa. Trích frame trước/tại/sau; một frame giữa khác mạnh trong khi hai frame ngoài gần giống nhau là tín hiệu hữu ích. Khi chỉ đúng một frame hình bị hỏng, có thể thay bằng frame sạch liền kề trên **bản xuất mới**, giữ nguyên luồng audio bằng `-c:a copy`. Kiểm tra lại ba frame và hash luồng audio; thay một frame không đòi dựng lại toàn bộ thoại hoặc đồ họa.
+6. `ffprobe` bản cuối, giải mã toàn file và so thời lượng, fps, số frame, hình tại điểm sửa, audio và các điểm nối. Giữ bản nguồn và bản preview trước; giao đường dẫn tuyệt đối của phiên bản mới.
