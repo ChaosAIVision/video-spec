@@ -2,6 +2,8 @@
 
 Đọc khi đã có clip và người dùng yêu cầu sửa giọng, lời, hình, nhịp dựng hoặc xuất video. Đây là nhánh hậu kỳ của `video-spec`; yêu cầu cụ thể của người dùng và bản đã duyệt quyết định phạm vi sửa. Các ca tham khảo: [Abbott COPD](abbott-postproduction-case.md) và [Ensure Remotion 0928](ensure-remotion-0928-case.md). Mốc giây và thông số của từng ca không phải mặc định cho dự án khác.
 
+Khi phải ghép nhiều lượt WAV, sửa đoạn lồng tiếng hoặc xử lý một nhân vật bị đổi giọng giữa các câu, dùng [dialogue-audio-assembly](../../dialogue-audio-assembly/SKILL.md) cho bản đồ giọng, đặt tiếng trên timeline và QA audio. Nếu người dùng chỉ yêu cầu WAV, giao WAV sau khi kiểm tra; phần dựng video của tài liệu này chỉ áp dụng khi được yêu cầu.
+
 ## 1. Chọn đúng nguồn và giữ đường quay lại
 
 - Xác định **file người dùng đang xem** bằng đường dẫn, thời lượng, fps và khung hình mẫu. Mốc giây chỉ có nghĩa trên đúng phiên bản đó; bản đã cắt có thể đổi cả thời lượng lẫn fps.

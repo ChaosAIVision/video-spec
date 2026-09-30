@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dialogue Audio Assembly"
+  short_description: "Keep voices and dialogue timing consistent"
+  default_prompt: "Use $dialogue-audio-assembly to assemble or repair dialogue WAVs while preserving speaker identity, complete words, and the current timeline."
